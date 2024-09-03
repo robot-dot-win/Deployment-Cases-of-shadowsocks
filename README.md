@@ -247,12 +247,13 @@ b.b.b.b
 
     // 3个远程端服务器：
     "servers": [
-        {   // 这个服务器就在本机
+        {   // 这个服务器在本机
+            "tcp_weight": 1.0,
             "address": "127.0.0.1",
             "port": 8388,
-            "method": "none",
-            "tcp_weight": 1.0
+            "method": "none"
         },
+        {
             "tcp_weight": 0.8,
             "address": "x.x.x.x",
             "port": 8443,
