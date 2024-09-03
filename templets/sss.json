@@ -1,0 +1,55 @@
+// shadowsocks远程端配置文件
+//
+// Linux:   /etc/ss/sss.json
+// Windows: c:\ss\config\sss.json
+//
+// Copyright(C) 2024, Martin Young <martin_young@live.cn>
+//------------------------------------------------------------
+
+{
+    // 一台机器上，可以混合多个IP、多个端口定义多个远程端服务(通常只需一个)：
+    "servers": [
+        {
+            //"acl": "c:\\ss\\config\\sss.acl",  // Windows平台
+            "acl": "/etc/ss/sss.acl",
+            "server": "0.0.0.0",          // 监听所有网卡的IP4地址
+            //"server": "172.31.1.2",     // 仅监听这个IP地址
+            "server_port": 8388,
+            "method": "aes-256-gcm",
+            "password": "Password@Port-8388"
+        }
+    ],
+
+    // 全局：
+    "mode": "tcp_only",
+    "no_delay": false,
+    "keep_alive": 15,
+    "timeout": 3600,
+    "nofile": 4096,
+
+    // 关于fastopen的支持：
+    // https://github.com/shadowsocks/shadowsocks/wiki/Feature-Comparison-across-Different-Versions
+    "fast_open": true,
+
+    // 关于ss-redir的支持（Linux）：
+    // https://github.com/shadowsocks/shadowsocks/wiki/Feature-Comparison-across-Different-Versions
+    // 如果配合透明代理，则需设置Outbound socket SO_MARK：
+    //"outbound_fwmark": 255,
+
+    // 日志：
+    "log": {
+        "level": 1,
+        "format": {
+            "without_time": false,
+        },
+        //"config_path": "c:\\ss\\config\\log.yaml"    // Windows平台
+        "config_path": "/etc/ss/log.yaml"
+    },
+
+    // 关于workers的支持：
+    // https://github.com/shadowsocks/shadowsocks/wiki/Feature-Comparison-across-Different-Versions
+    "runtime": {
+        "mode": "multi_thread",
+        "worker_count": 10
+    }
+}

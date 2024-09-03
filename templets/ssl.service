@@ -1,0 +1,20 @@
+# shadowsocks本地端CentOS Stream 9 systemd服务配置文件
+#
+# /usr/lib/systemd/system/ssl.service
+#
+# Copyright(C) 2024, Martin Young <martin_young@live.cn>
+#------------------------------------------------------------
+
+[Unit]
+Description=Shadowsocks Client
+Documentation=https://github.com/shadowsocks/shadowsocks-rust
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/opt/ss/sslocal --config /etc/ss/ssl.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

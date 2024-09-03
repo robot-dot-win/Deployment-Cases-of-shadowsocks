@@ -1,0 +1,90 @@
+// shadowsocks本地端配置文件
+//
+// Linux:   /etc/ss/ssl.json
+// Windows: c:\ss\config\ssl.json
+//
+// Copyright(C) 2024, Martin Young <martin_young@live.cn>
+//------------------------------------------------------------
+
+{
+    // 一台机器上，可以混合多个IP、多个端口、多个协议定义多个本地端服务：
+    "locals": [
+        //{   // Linux透明代理：
+        //    "local_address": "127.0.0.1",
+        //    "local_port": 61082,
+        //    "protocol": "redir",
+        //    "tcp_redir": "redirect"
+        //},
+        //{   // 本机SOCKS5代理：
+        //    //"acl": "c:\\ss\\config\\61080.acl",  // Windows平台
+        //    "acl": "/etc/ss/61080.acl",
+        //    //"socks5_auth_config_path": "c:\\ss\\config\\auth.json",  // Windows平台
+        //    "socks5_auth_config_path": "/etc/ss/auth.json",
+        //    "local_address": "127.0.0.1",
+        //    "local_port": 61080
+        //},
+        {   // 局域网SOCKS5代理：
+            //"acl": "c:\\ss\\config\\ssl.acl",  // Windows平台
+            "acl": "/etc/ss/ssl.acl",
+            //"socks5_auth_config_path": "c:\\ss\\config\\auth.json",  // Windows平台
+            "socks5_auth_config_path": "/etc/ss/auth.json",
+            "local_address": "192.168.250.60",
+            "local_port": 61081
+         }
+    ],
+
+    // 要连接的远程端服务器列表，定义多个时，有些本地端版本支持LB/HA：
+    "servers": [
+        //{
+        //    //"timeout": 3600,
+        //    "tcp_weight": 1.0,
+        //    "address": "127.0.0.1",     // 本机上部署的远程端
+        //    "port": 8386,
+        //    "method": "aes-256-gcm",
+        //    "password": "Password@Port-8386"
+        //},
+        //{
+        //    //"timeout": 3600,
+        //    "tcp_weight": 0.8,
+        //    "address": "x.x.x.x",
+        //    "port": 8387,
+        //    "method": "aes-256-gcm",
+        //    "password": "Password@Port-8387"
+        //},
+        {
+            //"timeout": 3600,
+            "tcp_weight": 1.0,
+            "address": "y.y.y.y",
+            "port": 8388,
+            "method": "aes-256-gcm",
+            "password": "Password@Port-8388"
+        }
+    ],
+
+    // 全局：
+    "mode": "tcp_only",
+    "no_delay": false,
+    "keep_alive": 15,
+    "timeout": 3600,
+
+    // 关于fastopen的支持：
+    // https://github.com/shadowsocks/shadowsocks/wiki/Feature-Comparison-across-Different-Versions
+    "fast_open": true,
+
+    // 日志：
+    "log": {
+        "level": 1,
+        "format": {
+            "without_time": false,
+        },
+        //"config_path": "c:\\ss\\config\\log.yaml"    // Windows平台
+        "config_path": "/etc/ss/log.yaml"
+    },
+
+    // 关于workers的支持：
+    // https://github.com/shadowsocks/shadowsocks/wiki/Feature-Comparison-across-Different-Versions
+    "runtime": {
+        "mode": "multi_thread",
+        "worker_count": 10
+    }
+}
