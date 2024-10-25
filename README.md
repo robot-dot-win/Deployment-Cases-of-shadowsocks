@@ -148,7 +148,7 @@ b.b.b.b
             "acl": "/etc/ss/ssl.acl",
             "socks5_auth_config_path": "/etc/ss/auth.json",
             "local_address": "192.168.250.60",
-            "local_port": 1081
+            "local_port": 1080
          }
     ],
 
