@@ -1,6 +1,6 @@
 # shadowsocks远程端CentOS Stream 9 systemd服务配置文件
 #
-# /usr/lib/systemd/system/ssl.service
+# /usr/lib/systemd/system/sss.service
 #
 # Copyright(C) 2024, Martin Young <martin_young@live.cn>
 #------------------------------------------------------------
