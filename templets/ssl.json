@@ -77,8 +77,8 @@
         "format": {
             "without_time": false,
         },
-        //"config_path": "c:\\ss\\config\\log.yaml"    // Windows平台
-        "config_path": "/etc/ss/log.yaml"
+        //"config_path": "c:\\ss\\config\\ssl-log.yaml"    // Windows平台
+        "config_path": "/etc/ss/ssl-log.yaml"
     },
 
     // 关于workers的支持：
