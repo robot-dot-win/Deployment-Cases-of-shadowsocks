@@ -16,5 +16,8 @@ User=root
 ExecStart=/opt/ss/ssserver --config /etc/ss/sss.json
 Restart=on-failure
 
+# 日志级别：trace=0, debug=1, info=2, warn=3, error=4, off(pseudo level to disable all logging for the target)
+Environment="RUST_LOG=info,shadowsocks_rust::service::server=debug"
+
 [Install]
 WantedBy=multi-user.target

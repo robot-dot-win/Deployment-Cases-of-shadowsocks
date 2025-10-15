@@ -33,7 +33,7 @@
          }
     ],
 
-    // 要连接的远程端服务器列表，定义多个时，有些本地端版本支持LB/HA：
+    // 要连接的远程端服务器列表。定义多个时，本地端可使用负载均衡：
     "servers": [
         //{
         //    //"timeout": 3600,
@@ -61,6 +61,13 @@
         }
     ],
 
+    // 负载均衡：
+    //"balancer": {
+    //    "max_server_rtt": 3,        // 服务器响应超时
+    //    "check_interval": 10,       // 健康检查间隔
+    //    "check_best_interval": 5    // 最优服务器检查间隔（可选，通常小于健康检查间隔）
+    //},
+
     // 全局：
     "mode": "tcp_only",
     "no_delay": false,
@@ -71,14 +78,23 @@
     // https://github.com/shadowsocks/shadowsocks/wiki/Feature-Comparison-across-Different-Versions
     "fast_open": true,
 
-    // 日志：
+    // 日志：trace=0, debug=1, info=2, warn=3, error=4, off(pseudo level to disable all logging for the target)
     "log": {
-        "level": 1,
-        "format": {
-            "without_time": false,
-        },
-        //"config_path": "c:\\ss\\config\\ssl-log.yaml"    // Windows平台
-        "config_path": "/etc/ss/ssl-log.yaml"
+        "writers": [
+            {
+                "file": {
+                    //"level": 2,     // 默认0。环境变量RUST_LOG优先
+                    "format": {
+                        "without_time": false,
+                    },
+                    //"directory": "c:\\ss\\log",   // Windows平台
+                    "directory": "/var/log/ss",
+                    "prefix": "ssl",
+                    "rotation": "daily",
+                    "max_files": 32
+                }
+            }
+        ]
     },
 
     // 关于workers的支持：

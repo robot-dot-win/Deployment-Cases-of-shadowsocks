@@ -36,14 +36,23 @@
     // 如果配合透明代理，则需设置Outbound socket SO_MARK：
     //"outbound_fwmark": 255,
 
-    // 日志：
+    // 日志：trace=0, debug=1, info=2, warn=3, error=4, off(pseudo level to disable all logging for the target)
     "log": {
-        "level": 1,
-        "format": {
-            "without_time": false,
-        },
-        //"config_path": "c:\\ss\\config\\sss-log.yaml"    // Windows平台
-        "config_path": "/etc/ss/sss-log.yaml"
+        "writers": [
+            {
+                "file": {
+                    //"level": 2,     // 默认0。环境变量RUST_LOG优先
+                    "format": {
+                        "without_time": false,
+                    },
+                    //"directory": "c:\\ss\\log",   // Windows平台
+                    "directory": "/var/log/ss",
+                    "prefix": "sss",
+                    "rotation": "daily",
+                    "max_files": 32
+                }
+            }
+        ]
     },
 
     // 关于workers的支持：
