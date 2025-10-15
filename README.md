@@ -32,21 +32,7 @@ systemctl enable sss
 systemctl enable ssl
 ```
 
-在Windows上，可使用PowerShell设置服务。本地端和远程端设置如下：
-
-```powershell
-New-Service -Name "sslocal" `
-            -DisplayName "Shadowsocks本地端服务" `
-            -BinaryPathName "c:\ss\sswinservice.exe local -c c:\ss\config\ssl.json" `
-            -StartupType "Automatic" `
-            -DependsOn "Tcpip"
-
-New-Service -Name "ssserver" `
-            -DisplayName "Shadowsocks远程端服务" `
-            -BinaryPathName "c:\ss\sswinservice.exe server -c c:\ss\config\sss.json" `
-            -StartupType "Automatic" `
-            -DependsOn "Tcpip"
-```
+`sss.ps1`和`ssl.ps1`分别是远程端和本地端Windows服务设置的PowerShell脚本。
 
 可根据具体应用场景，修改模板配置文件。
 
